@@ -41,7 +41,11 @@ namespace assignment_1.entities
         public int Duration { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public ICollection<Topic> TopID { get; set; } = new List<Topic>();
+        public ICollection<Topic> TopID { get; set; } = new HashSet<Topic>();
+        public ICollection<CourseIns> CourseIns { get; set; } = new HashSet<CourseIns>();
+        public ICollection<StudCourse> StudCourse { get; set; } = new HashSet<StudCourse>();
+
+
 
         #endregion
 

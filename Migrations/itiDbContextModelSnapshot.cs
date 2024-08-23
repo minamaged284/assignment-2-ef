@@ -48,20 +48,20 @@ namespace assignment_1.Migrations
 
             modelBuilder.Entity("assignment_1.entities.CourseIns", b =>
                 {
-                    b.Property<int>("COurseIDId")
+                    b.Property<int>("CourseID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InstructorID")
                         .HasColumnType("int");
 
                     b.Property<int>("Evaluate")
                         .HasColumnType("int");
 
-                    b.Property<int>("InsIDId")
-                        .HasColumnType("int");
+                    b.HasKey("CourseID", "InstructorID");
 
-                    b.HasIndex("COurseIDId");
+                    b.HasIndex("InstructorID");
 
-                    b.HasIndex("InsIDId");
-
-                    b.ToTable("coursesIns");
+                    b.ToTable("CourseIns");
                 });
 
             modelBuilder.Entity("assignment_1.entities.Department", b =>
@@ -121,20 +121,20 @@ namespace assignment_1.Migrations
 
             modelBuilder.Entity("assignment_1.entities.StudCourse", b =>
                 {
-                    b.Property<int>("CourseIDId")
+                    b.Property<int>("StudentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseID")
                         .HasColumnType("int");
 
                     b.Property<int>("Grade")
                         .HasColumnType("int");
 
-                    b.Property<int>("StuIDID")
-                        .HasColumnType("int");
+                    b.HasKey("StudentID", "CourseID");
 
-                    b.HasIndex("CourseIDId");
+                    b.HasIndex("CourseID");
 
-                    b.HasIndex("StuIDID");
-
-                    b.ToTable("StudCourse", "dbo");
+                    b.ToTable("StudCourse");
                 });
 
             modelBuilder.Entity("assignment_1.entities.Student", b =>
@@ -194,21 +194,17 @@ namespace assignment_1.Migrations
 
             modelBuilder.Entity("assignment_1.entities.CourseIns", b =>
                 {
-                    b.HasOne("assignment_1.entities.Course", "COurseID")
-                        .WithMany()
-                        .HasForeignKey("COurseIDId")
+                    b.HasOne("assignment_1.entities.Course", null)
+                        .WithMany("CourseIns")
+                        .HasForeignKey("CourseID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("assignment_1.entities.Instructor", "InsID")
-                        .WithMany()
-                        .HasForeignKey("InsIDId")
+                    b.HasOne("assignment_1.entities.Instructor", null)
+                        .WithMany("CourseInstructor")
+                        .HasForeignKey("InstructorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("COurseID");
-
-                    b.Navigation("InsID");
                 });
 
             modelBuilder.Entity("assignment_1.entities.Instructor", b =>
@@ -224,21 +220,17 @@ namespace assignment_1.Migrations
 
             modelBuilder.Entity("assignment_1.entities.StudCourse", b =>
                 {
-                    b.HasOne("assignment_1.entities.Course", "CourseID")
-                        .WithMany()
-                        .HasForeignKey("CourseIDId")
+                    b.HasOne("assignment_1.entities.Course", null)
+                        .WithMany("StudCourse")
+                        .HasForeignKey("CourseID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("assignment_1.entities.Student", "StuID")
-                        .WithMany()
-                        .HasForeignKey("StuIDID")
+                    b.HasOne("assignment_1.entities.Student", null)
+                        .WithMany("StudentCourse")
+                        .HasForeignKey("StudentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("CourseID");
-
-                    b.Navigation("StuID");
                 });
 
             modelBuilder.Entity("assignment_1.entities.Student", b =>
@@ -263,6 +255,10 @@ namespace assignment_1.Migrations
 
             modelBuilder.Entity("assignment_1.entities.Course", b =>
                 {
+                    b.Navigation("CourseIns");
+
+                    b.Navigation("StudCourse");
+
                     b.Navigation("TopID");
                 });
 
@@ -271,6 +267,16 @@ namespace assignment_1.Migrations
                     b.Navigation("InstID");
 
                     b.Navigation("StudtID");
+                });
+
+            modelBuilder.Entity("assignment_1.entities.Instructor", b =>
+                {
+                    b.Navigation("CourseInstructor");
+                });
+
+            modelBuilder.Entity("assignment_1.entities.Student", b =>
+                {
+                    b.Navigation("StudentCourse");
                 });
 #pragma warning restore 612, 618
         }

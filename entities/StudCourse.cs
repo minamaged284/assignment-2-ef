@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 namespace assignment_1.entities
 {
 
-    [Table("StudCourse", Schema = "dbo")]
+    //[Table("StudCourse", Schema = "dbo")]
 
     internal class StudCourse
     {
         #region by comvention
         public int Grade { get; set; }
-        public Student StuID { get; set; }
-        public Course CourseID { get; set; }
+        public int StudentID { get; set; }
+        public int CourseID { get; set; }
         #endregion
 
         //#region by data annotations

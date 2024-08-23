@@ -15,8 +15,8 @@ namespace assignment_1.entities
         #region by comvention
         public int Evaluate { get; set; }
 
-        public Instructor InsID { get; set; }
-        public Course COurseID { get; set; }
+        public int InstructorID { get; set; }
+        public int CourseID { get; set; }
         #endregion
 
         //#region by data annotaions
