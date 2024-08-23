@@ -41,6 +41,7 @@ namespace assignment_1.entities
         public string LNAme { get; set; }
         public string Adress { get; set; }
         public int Age { get; set; }
+        public ICollection<StudCourse> StudentCourse{ get; set; } = new HashSet<StudCourse>();
 
         public Department DepartID { get; set; }
         #endregion
